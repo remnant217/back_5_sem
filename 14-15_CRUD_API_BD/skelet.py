@@ -101,7 +101,6 @@ class Movie(Base):
 Наполняем src/database.py 
 '''
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
-from .models import Base
 
 engine = create_async_engine('sqlite+aiosqlite:///./shows.db', echo=True)
 
@@ -110,12 +109,6 @@ AsyncSessionLocal = async_sessionmaker(bind=engine, expire_on_commit=False)
 async def get_session():
     async with AsyncSessionLocal() as session:
         yield session
-
-# корутина для локального запуска движка, без Alembic, пригодится при тестировании
-async def init_db():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-
 # -------------------------------------------------------------------------------------------------------------
 
 # Alembic
@@ -231,6 +224,8 @@ async def get_list_movies(
 ) -> list[Movie]:
     # ограничение на кол-во фильмов в списке (1...100)
     limit = max(1, min(limit, 100))
+    # ограничение на смещение, чтобы не было отрицательным
+    offset = max(0, offset)
     # select(Movie) - запрос на выборку всех фильмов
     # order_by(Movie.id.asc()) - сортировка по ID (по возрастанию)
     # offset(offset).limit(limit) - пагинация (смещение + ограничение)
@@ -352,3 +347,77 @@ app.include_router(movie_router)
 
 # -------------------------------------------------------------------------------------------------------------
 
+# Фильтрация и сортировка в GET /movies
+'''
+Модифицируем функцию get_list_movies() из файла src/repositories/movies.py, реализовав продвинутую
+выборку фильмов с фильтрацией, поиском и сортировкой:
+'''
+# создаем словарь с разрешенными сортировками, для удобства и безопасности
+# ключи - строки, которые может передать пользователь (понятные названия, чтобы клиент не думал про SQL)
+# значения - SQLAlchemy-выражения для сортировки (по возрастанию и убыванию)
+# если указан минус (-) в начале - сортировка по убыванию 
+ALLOWED_ORDERS = {
+    'title': Movie.title.asc(),
+    '-title': Movie.title.desc(),
+    'year': Movie.year.asc(),
+    '-year': Movie.year.desc(),
+    'rating': Movie.rating.asc(),
+    '-rating': Movie.rating.desc(),
+    'id': Movie.id.asc(),
+    '-id': Movie.id.desc()
+}
+
+# добавляем параметры фильтрации и сортировки в функцию
+async def get_list_movies(
+    session: AsyncSession,
+    year_min: int | None = None,        # минимальный год фильма
+    year_max: int | None = None,        # максимальный год фильма
+    min_rating: float | None = None,    # минимальный рейтинг
+    order_by: str | None = '-rating',   # параметр сортировки (по умолчанию сортируем по рейтингу)
+    limit: int = 50, 
+    offset: int = 0,
+) -> list[Movie]:
+    
+    # пока формируем базовый SQL-запрос "выбрать все фильмы"
+    query = select(Movie)
+    # фильтрация по годам
+    if year_min is not None:
+        query = query.where(Movie.year >= year_min)
+    if year_max is not None:
+        query = query.where(Movie.year <= year_max)
+    # фильтрация по минимальному рейтингу
+    if min_rating is not None:
+        query = query.where(Movie.rating >= min_rating)
+    
+    # ключ сортировки (order_by, если указан, по умолчанию'-rating')
+    key = order_by or '-rating'
+    # проверка, что передан корректный параметр сортировки (если передано некорректное значение - сортируем по убыванию рейтинга)
+    primary_order = ALLOWED_ORDERS.get(key, Movie.rating.desc())
+    # вторичная сортировка по ID (если у двух фильмов одинаковый рейтинг или год)
+    query = query.order_by(primary_order, Movie.id.asc())
+
+    # применяем пагинацию
+    limit = max(1, min(limit, 100))
+    offset = max(0, offset)
+    query = query.offset(offset).limit(limit)
+
+    # выполняем запрос и получаем список фильмов
+    result = await session.execute(query)
+    return list(result.scalars().all())
+
+'''
+Обновляем эндпоинт get_movies_list():
+'''
+
+# добавляем в эндпоинт новые параметры сортировки и фильтрации
+@router.get('/', response_model=list[MovieOut])
+async def get_movies_list(
+    year_min: int | None = None,
+    year_max: int | None = None,
+    min_rating: float | None = None,
+    order_by: str | None = '-rating',
+    session: AsyncSession = Depends(get_session),
+    limit: int = 50, 
+    offset: int = 0
+):
+    return await repo.get_list_movies(session, year_min, year_max, min_rating, order_by, limit, offset)

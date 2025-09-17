@@ -3,6 +3,18 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.models import Movie
 from src.schemas.movie import MovieCreate, MovieUpdate
 
+# создаем словарь с разрешенными сортировками
+ALLOWED_ORDERS = {
+    'title': Movie.title.asc(),
+    '-title': Movie.title.desc(),
+    'year': Movie.year.asc(),
+    '-year': Movie.year.desc(),
+    'rating': Movie.rating.asc(),
+    '-rating': Movie.rating.desc(),
+    'id': Movie.id.asc(),
+    '-id': Movie.id.desc()
+}
+
 # функция для создания фильма
 async def create_movie(session: AsyncSession, data: MovieCreate) -> Movie:
     new_movie = Movie(**data.model_dump())
@@ -15,9 +27,33 @@ async def get_movie(session: AsyncSession, movie_id: int) -> Movie | None:
     return await session.get(Movie, movie_id)
 
 # функция для получения списка фильмов
-async def get_list_movies(session: AsyncSession, limit: int = 50, offset: int = 0) -> list[Movie]:
+async def get_list_movies(
+    session: AsyncSession,
+    year_min: int | None = None,        
+    year_max: int | None = None,        
+    min_rating: float | None = None,    
+    order_by: str | None = '-rating',   
+    limit: int = 50, 
+    offset: int = 0,
+) -> list[Movie]:
+    
+    query = select(Movie)
+    
+    if year_min is not None:
+        query = query.where(Movie.year >= year_min)
+    if year_max is not None:
+        query = query.where(Movie.year <= year_max)
+    if min_rating is not None:
+        query = query.where(Movie.rating >= min_rating)
+    
+    key = order_by or '-rating'
+    primary_order = ALLOWED_ORDERS.get(key, Movie.rating.desc())
+    query = query.order_by(primary_order, Movie.id.asc())
+
     limit = max(1, min(limit, 100))
-    query = select(Movie).order_by(Movie.id.asc()).offset(offset).limit(limit)
+    offset = max(0, offset)
+    query = query.offset(offset).limit(limit)
+
     result = await session.execute(query)
     return list(result.scalars().all())
 

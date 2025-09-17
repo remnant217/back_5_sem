@@ -14,11 +14,15 @@ router = APIRouter(
 # получаем список фильмов
 @router.get('/', response_model=list[MovieOut])
 async def get_movies_list(
+    year_min: int | None = None,
+    year_max: int | None = None,
+    min_rating: float | None = None,
+    order_by: str | None = '-rating',
     session: AsyncSession = Depends(get_session),
     limit: int = 50, 
     offset: int = 0
 ):
-    return await repo.get_list_movies(session, limit, offset)
+    return await repo.get_list_movies(session, year_min, year_max, min_rating, order_by, limit, offset)
 
 # получаем фильм по ID
 @router.get('/{movie_id}', response_model=MovieOut)
