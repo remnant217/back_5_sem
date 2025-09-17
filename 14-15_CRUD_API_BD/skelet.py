@@ -251,7 +251,7 @@ async def put_movie(session: AsyncSession, movie_id: int, movie_data: MovieCreat
     return movie
 
 # частичное обновление фильма
-async def patch_movie(session: AsyncSession, movie_id: int, movie_data: MovieCreate) -> Movie | None:
+async def patch_movie(session: AsyncSession, movie_id: int, movie_data: MovieUpdate) -> Movie | None:
     movie = await session.get(Movie, movie_id)
     if not movie:
         return None
@@ -320,7 +320,7 @@ async def put_movie(movie_id: int, movie_data: MovieCreate, session: AsyncSessio
 
 # частично обновляем данные о фильме
 @router.patch('/{movie_id}', response_model=MovieUpdate)
-async def patch_movie(movie_id: int, movie_data: MovieCreate, session: AsyncSession = Depends(get_session)):
+async def patch_movie(movie_id: int, movie_data: MovieUpdate, session: AsyncSession = Depends(get_session)):
     movie = await repo.put_movie(session, movie_id, movie_data)
     if not movie:
         raise HTTPException(status_code=404, detail='Фильм не найден')

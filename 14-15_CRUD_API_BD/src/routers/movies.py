@@ -33,6 +33,22 @@ async def get_movie(movie_id: int, session: AsyncSession = Depends(get_session))
 async def create_movie(movie_data: MovieCreate, session: AsyncSession = Depends(get_session)):
     return await repo.create_movie(session, movie_data)
 
+# полностью обновляем данные о фильме
+@router.put('/{movie_id}', response_model=MovieCreate)
+async def put_movie(movie_id: int, movie_data: MovieCreate, session: AsyncSession = Depends(get_session)):
+    movie = await repo.put_movie(session, movie_id, movie_data)
+    if not movie:
+        raise HTTPException(status_code=404, detail='Фильм не найден')
+    return movie
+
+# частично обновляем данные о фильме
+@router.patch('/{movie_id}', response_model=MovieUpdate)
+async def patch_movie(movie_id: int, movie_data: MovieUpdate, session: AsyncSession = Depends(get_session)):
+    movie = await repo.patch_movie(session, movie_id, movie_data)
+    if not movie:
+        raise HTTPException(status_code=404, detail='Фильм не найден')
+    return movie
+
 # удаляем фильм из БД
 @router.delete('/{movie_id}')
 async def delete_movie(movie_id: int, session: AsyncSession = Depends(get_session)):

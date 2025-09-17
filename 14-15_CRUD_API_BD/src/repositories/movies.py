@@ -32,7 +32,7 @@ async def put_movie(session: AsyncSession, movie_id: int, movie_data: MovieCreat
     return movie
 
 # частичное обновление фильма
-async def patch_movie(session: AsyncSession, movie_id: int, movie_data: MovieCreate) -> Movie | None:
+async def patch_movie(session: AsyncSession, movie_id: int, movie_data: MovieUpdate) -> Movie | None:
     movie = await session.get(Movie, movie_id)
     if not movie:
         return None
