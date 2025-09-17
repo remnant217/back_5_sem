@@ -421,3 +421,187 @@ async def get_movies_list(
     offset: int = 0
 ):
     return await repo.get_list_movies(session, year_min, year_max, min_rating, order_by, limit, offset)
+
+# -------------------------------------------------------------------------------------------------------------
+
+# Создание файла test/conftest.py
+
+'''
+В папке tests создадим файл test/conftest.py для настройки будущих тестов. 
+Pytest устроен так, что автоматически ищет файл conftest.py в папке с тестами и во всех родительских папках.
+Все, что определено в conftest.py, автоматически становится доступно во всех тестах.
+Импортировать conftest.py вручную не нужно - pytest сделает все сам.
+Необходимая логика будет в функциях, снаружи обернутых фикстурами @pytest.fixture.
+Фикстуры позволят нам автоматически готовить окружение перед тестами, делая будущие тесты
+короче, удобнее и надежнее.
+
+СОВЕТ ПРЕПОДАВАТЕЛЮ: студенты уже работали с фикстурами на курсе по тестированию.
+Учитывайте это при написании кода.
+'''
+import asyncio
+import pytest
+from fastapi.testclient import TestClient
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
+from sqlalchemy.pool import StaticPool
+
+# экземпляр тестируемого приложения
+from src.main import app
+# асинхронный движок SQLAlchemy
+from src.database import get_session
+# метаданные всех моделей для создания и удаления таблиц
+from src.models import Base, Movie
+
+# список с тестовыми фильмами
+MOVIES_TEST = [
+    ('Интерстеллар', 'Научная фантастика', 2014, 8.3),
+    ('Гладиатор', 'Исторический', 2000, 8.6),
+    ('Форрест Гамп', 'Драма', 1994, 8.1),
+    ('Унесенные призраками', 'Аниме', 2001, 8.0),
+    ('Шрэк', 'Мультфильм', 2001, 7.7),
+    ('Престиж', 'Триллер', 2006, 7.6),
+    ('Тайна Коко', 'Мультфильм', 2017, 7.8),
+]
+
+# создаем тестовый SQLite-движок, общий для всех тестов
+# scope='session' - движок создается один раз всю сессию тестов
+@pytest.fixture(scope='session')
+def test_engine():
+    # SQLite-движок, где база живет в памяти программы, не на диске
+    engine = create_async_engine("sqlite+aiosqlite:///:memory:", poolclass=StaticPool)
+    yield engine
+    # engine.dispose() - закрываем движок в конце тестов
+    asyncio.run(engine.dispose())
+
+# создаем фабрику сессий
+@pytest.fixture(scope='session')
+# при вызове test_sessionmaker() pytest сначала вызовет test_engine(), если движок еще не создан
+def test_sessionmaker(test_engine):
+    return async_sessionmaker(test_engine, expire_on_commit=False)
+
+# подготовка базы перед каждым тестом
+# без scope='session', чтобы фикстура выполнялась перед каждым тестом (в данном случае - чтобы тест работал с чистой БД)
+@pytest.fixture
+# перед вызовом prepare_db() сначала вызовутся test_engine() и test_sessionmaker()
+def prepare_db(test_engine, test_sessionmaker):
+    # служебная внутренняя функция для очистки и заполнения тестовой БД
+    async def _setup():
+        # открываем соединение с базой
+        async with test_engine.begin() as conn:
+            # удаляем все таблицы
+            await conn.run_sync(Base.metadata.drop_all)
+            # создаем таблицы заново
+            await conn.run_sync(Base.metadata.create_all)
+
+        # создаем сессию
+        async with test_sessionmaker() as session:
+            # добавляем тестовые фильмы в БД
+            session.add_all([Movie(title=t, genre=g, year=y, rating=r) for (t, g, y, r) in MOVIES_TEST])
+            await session.commit()
+    # вызываем корутину _setup() внутри синхронной функции (т.к. pytest-фикситуры по умолчанию синхронные)
+    asyncio.run(_setup())
+    # в момент выполнения yield pytest запускает тест, где используется фикстура
+    yield
+
+# создаем тестовый клиент
+@pytest.fixture
+# перед вызовом client() сначала вызовутся prepare_db() и test_sessionmaker()
+def client(prepare_db, test_sessionmaker):
+    # замена зависимости, чтобы API использовал тестовую, а не реальную БД
+    async def override_get_session():
+        async with test_sessionmaker() as session:
+            yield session
+    # если запросят зависимость get_session - будем отдавать override_get_session
+    app.dependency_overrides[get_session] = override_get_session
+
+    with TestClient(app) as c:
+        # отдаем тестовый клиент в тест
+        yield c
+    # после завершения теста убираем подмену, чтобы get_session снова указывал на нужную функцию
+    app.dependency_overrides.pop(get_session, None)
+
+'''
+При вызове client() в тестах порядок вызова фикстур будет примерно такой:
+1. Pytest идет client() - нужны prepare_db() и test_sessionmaker()
+2. Pytest идет в prepare_db() - нужны test_engine() и test_sessionmaker()
+3. Pytest идет в test_engine() - создает и возвращает движок
+4. Pytest идет в test_sessionmaker() - берет готовый test_engine, создает и возвращает фабрику сессий
+5. Pytest идет обратно в prepare_db() - выполняет _setup()
+6. Pytest идет обратно client() - меняет зависимости, создается TestClient(app) и возвращается объект клиента в тест
+7. Выполняется тест через client
+8. Завершение теста - в client() очищается dependency_overrides
+'''
+
+# -------------------------------------------------------------------------------------------------------------
+
+# Создание файла test/test_movies.py
+
+import pytest
+
+# тестирование фильтрации
+@pytest.mark.parametrize(
+    'params, expected_titles',
+    [
+        ({}, {'Интерстеллар', 'Гладиатор', 'Форрест Гамп', 'Унесенные призраками', 'Шрэк', 'Престиж', 'Тайна Коко'}),
+        ({'year_min': 2010}, {'Интерстеллар', 'Тайна Коко'}),
+        ({'year_max': 2001}, {'Гладиатор', 'Форрест Гамп', 'Унесенные призраками', 'Шрэк'}),
+        ({'min_rating': 8.2}, {'Интерстеллар', 'Гладиатор'}),
+        ({'year_min': 2000, 'year_max': 2006, 'min_rating': 7.8}, {'Гладиатор', 'Унесенные призраками'})
+    ]
+)
+def test_movies_filters(client, params, expected_titles):
+    response = client.get('/movies', params=params)
+    assert response.status_code == 200
+    assert {movie['title'] for movie in response.json()} == expected_titles
+
+
+# тестирование сортировки и пагинации
+def test_order_and_pagination(client):
+    # пример некорректного order_by (API должен понять, что такой сортировки нет и применить вариант по умолчанию -rating)
+    response = client.get('/movies', params={'order_by': '123', 'limit': 7})
+    assert response.status_code == 200
+    titles = [movie['title'] for movie in response.json()]
+    # проверяем, что список названий фильмов отсортирован по рейтингу (от большего к меньшему)
+    assert titles == [
+        'Гладиатор',
+        'Интерстеллар',
+        'Форрест Гамп',
+        'Унесенные призраками',
+        'Тайна Коко',
+        'Шрэк',
+        'Престиж'
+    ]
+
+    # сортировка по title (лексикографическая) и проверка пагинации
+    # сортируем по алфавиту и берем первые 2 фильма
+    response_1 = client.get('/movies', params={'order_by': 'title', 'limit': 2, 'offset': 0})
+    # сортируем по алфавиту, пропускаем первые 2 фильма, берем следующие 2
+    response_2 = client.get('/movies', params={'order_by': 'title', 'limit': 2, 'offset': 2})
+    assert [movie['title'] for movie in response_1.json()] == ['Гладиатор', 'Интерстеллар']
+    assert [movie['title'] for movie in response_2.json()] == ['Престиж', 'Тайна Коко']
+
+# тестирование CRUD-операций
+def test_crud(client):
+    # тестируем create
+    data = {'title': 'Дюна', 'genre': 'Научная фантастика', 'rating': 7.7, 'year': 2021}
+    response = client.post('/movies', json=data)
+    assert response.status_code in (200, 201)
+    created_movie = response.json()
+    movie_id = created_movie['id']
+
+    # тестируем patch
+    response = client.patch(f'/movies/{movie_id}', json={'rating': 7.0})
+    assert response.status_code == 200
+    assert response.json()['rating'] == 7.0
+
+    # тестируем read
+    response = client.get(f'/movies/{movie_id}')
+    assert response.status_code == 200
+    assert response.json()['year'] == 2021
+
+    # тестируем delete
+    response = client.delete(f'/movies/{movie_id}')
+    assert response.status_code in (200, 204)
+
+    # тестируем read удаленного фильма
+    response = client.get(f'/movies/{movie_id}')
+    assert response.status_code == 404
