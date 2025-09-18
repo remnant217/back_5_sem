@@ -627,7 +627,3 @@ def test_crud(client):
     # тестируем read удаленного фильма
     response = client.get(f'/movies/{movie_id}')
     assert response.status_code == 404
-
-'''
-
-'''
