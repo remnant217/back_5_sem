@@ -5,18 +5,19 @@
 
 # Подготовка проекта
 '''
-1. Создать новую папку проекта (movies_api)
-2. Создать и активировать виртуальное окружение:
+Задание № 1 - создать новую папку проекта (movies_api)
+
+Задание № 2 - создать и активировать виртуальное окружение:
 python -m venv venv
 venv\scripts\activate
 
-3. Установить библиотеки:
+Задание № 3 - установить необходимые библиотеки:
 pip install fastapi uvicorn sqlalchemy alembic aiosqlite pytest httpx
 
-4. Сохранить зависимости в файл:
+Задание № 4 - сохранить зависимости в файл:
 pip freeze > requirements.txt
 
-5. Создаем базовую структуру каталогов:
+Задание № 5 - создать базовую структуру каталогов:
 movies_api/
 │── requirements.txt       # зависимости
 │── README.md              # описание проекта
@@ -31,7 +32,9 @@ movies_api/
 │
 └── tests/                 # тесты
 
-6. Пропишем минимальный код для проверки запуска приложения:
+СОВЕТ ПРЕПОДАВАТЕЛЮ: 
+
+Задание № 6 - написать минимальный код для проверки запуска приложения:
 '''
 from fastapi import FastAPI
 
@@ -42,7 +45,7 @@ async def root():
     return {'message': 'Movies API готов к работе!'}
 
 '''
-7. Запустим сервер:
+Задание № 7 - запустить сервер:
 uvicorn src.main:app --reload
 
 http://127.0.0.1:8000 → {"message":"Movies API готов к работе!"}
@@ -53,7 +56,7 @@ http://127.0.0.1:8000 → {"message":"Movies API готов к работе!"}
 # Модель БД
 
 '''
-Создаем src/models/__init__.py
+Задание № 8 - создать файл src/models/__init__.py
 Файл __init__.py делает папку пакетом Python. Так Python будет рассматривать папку models как модуль,
 из которого можно импортировать код. Для более чистой структуры проекта и облегчения работы Alembic,
 внутри __init__.py создадим класс Base:
@@ -71,7 +74,7 @@ from .movie import Movie
 __all__ = ['Base', 'Movie']
 
 '''
-Создаем модель Movie в файле src/models/movie.py
+Задание № 9 - создать модель Movie в файле src/models/movie.py
 '''
 # CheckConstraint - класс для валидации значений на уровне БД
 from sqlalchemy import Column, Integer, String, Float, CheckConstraint
@@ -87,6 +90,7 @@ class Movie(Base):
     rating = Column(Float, nullable=False)
     year = Column(Integer, nullable=False)
 
+    # __table_args__ - специальный атрибут для доп. настроек и ограничений на уровне всей таблицы
     __table_args__ = (
         # ограничения на рейтинг (0...10) и год выпуска фильма (>= 1888)
         # name помогает при отладке, чтении ошибок БД и работе с Alembic
@@ -98,7 +102,7 @@ class Movie(Base):
 
 # БД и сессии
 '''
-Наполняем src/database.py 
+Задание № 10 - создать файл src/database.py 
 '''
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
@@ -113,13 +117,13 @@ async def get_session():
 
 # Alembic
 '''
-Инициализация alembic:
+Задание № 11 - инициализировать alembic:
 alembic init alembic
 
-В alembic.ini задать URL для БД (синхронный):
+Задание № 12 - в alembic.ini задать URL для БД:
 sqlalchemy.url = sqlite:///./movies.db
 
-В alembic/env.py добавим путь к src и метаданные.
+Задание № 13 - в alembic/env.py добавить путь к src и метаданны:
 Когда Alembic запускает миграции, он запускает свое окружение (файлы внутри папки alembic/).
 По умолчанию Python видит только саму папку alembic/ и ее родителей, но не знает, что в соседнем src/ лежат исходники приложения.
 Нам нужно вручную добавить папку src/ в sys.path, чтобы Python мог импортировать src.models, src.database и другие модули:
@@ -142,7 +146,7 @@ from src.models import Base
 target_metadata = Base.metadata
 
 '''
-Генерируем и применяем миграцию:
+Задание № 14 - сгенерировать и применить миграцию:
 alembic revision --autogenerate -m "init movies"
 alembic upgrade head
 '''
@@ -151,8 +155,10 @@ alembic upgrade head
 
 # Pydantic-схемы
 '''
+Задание № 15 - создать файл src/schemas/__init__.py
 Сначала создаем пустой src/schemas/__init__.py, что папка schemas/ считалась пакетом Python.
 
+Задание № 16 - создать файл src/schemas/movie.py
 Затем создаем и наполняем src/schemas/movie.py:
 '''
 # подключаем класс date для работы с текущей датой
@@ -196,6 +202,7 @@ class MovieOut(MovieBase):
 
 # Репозиторий
 '''
+Задание № 16 - создать файл src/repositories/movies.py
 Пропишем логику взаимодействия с БД в файле src/repositories/movies.py:
 '''
 from sqlalchemy import select
@@ -268,6 +275,7 @@ async def delete_movie(session: AsyncSession, movie_id: int) -> bool:
 
 # Роутер
 '''
+Задание № 17 - создать файл src/routers/movies.py
 Пропишем код репозитория в src/routers/movies.py:
 '''
 from fastapi import APIRouter, Depends, HTTPException
@@ -332,6 +340,7 @@ async def delete_movie(movie_id: int, session: AsyncSession = Depends(get_sessio
 
 # Точка входа в приложение
 '''
+Задание № 18 - создать файл src/main.py
 Модифицируем код в main.py, добавив подключение роутера:
 '''
 from fastapi import FastAPI
@@ -349,6 +358,7 @@ app.include_router(movie_router)
 
 # Фильтрация и сортировка в GET /movies
 '''
+Задание № 19 - модифицировать файл src/repositories/movies.py
 Модифицируем функцию get_list_movies() из файла src/repositories/movies.py, реализовав продвинутую
 выборку фильмов с фильтрацией, поиском и сортировкой:
 '''
@@ -406,9 +416,9 @@ async def get_list_movies(
     return list(result.scalars().all())
 
 '''
+Задание № 20 - модифицировать эндпоинт get_movies_list() в файле src/routers/movies.py
 Обновляем эндпоинт get_movies_list():
 '''
-
 # добавляем в эндпоинт новые параметры сортировки и фильтрации
 @router.get('/', response_model=list[MovieOut])
 async def get_movies_list(
@@ -424,9 +434,10 @@ async def get_movies_list(
 
 # -------------------------------------------------------------------------------------------------------------
 
-# Создание файла test/conftest.py
+# Создание файла tests/conftest.py
 
 '''
+Задание № 21 - создать файл tests/conftest.py
 В папке tests создадим файл test/conftest.py для настройки будущих тестов. 
 Pytest устроен так, что автоматически ищет файл conftest.py в папке с тестами и во всех родительских папках.
 Все, что определено в conftest.py, автоматически становится доступно во всех тестах.
@@ -520,6 +531,7 @@ def client(prepare_db, test_sessionmaker):
     app.dependency_overrides.pop(get_session, None)
 
 '''
+Задание № 22 - обсудить логику вызова созданных фикстур
 При вызове client() в тестах порядок вызова фикстур будет примерно такой:
 1. Pytest идет client() - нужны prepare_db() и test_sessionmaker()
 2. Pytest идет в prepare_db() - нужны test_engine() и test_sessionmaker()
@@ -534,6 +546,15 @@ def client(prepare_db, test_sessionmaker):
 # -------------------------------------------------------------------------------------------------------------
 
 # Создание файла test/test_movies.py
+'''
+Задание № 21 - создать файл test/test_movies.py
+Остался финальный шаг - создать файл с тестами. Будем проверять работу фильтрации, сортировки,
+пагинации и CRUD-операций.
+
+СОВЕТ ПРЕПОДАВАТЕЛЮ: при добавлении каждоый новой функции запускайте процесс тестирования через python -m pytest,
+обсуждайте со студентами полученные результаты. Если остается время, то покажите студентам примеры, когда тесты
+могут сломаться.
+'''
 
 import pytest
 
