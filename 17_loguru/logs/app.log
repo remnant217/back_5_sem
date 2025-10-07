@@ -1,0 +1,897 @@
+14:57:39 | INFO     | main:root:13 | Вызван корневой эндпоинт
+14:57:58 | INFO     | main:get_calc:19 | Пользователь обратился к эндпоинту /calc
+14:57:58 | INFO     | main:get_calc:22 | Попытка вычислить выражение 2 ** 8
+14:57:58 | INFO     | main:get_calc:24 | Результат вычисления: 256
+14:58:53 | INFO     | main:get_calc:19 | Пользователь обратился к эндпоинту /calc
+14:58:53 | INFO     | main:get_calc:22 | Попытка вычислить выражение 2 / 0
+14:58:53 | ERROR    | main:get_calc:28 | При вычислении произошла ошибка
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "D:\Python3126\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 344
+               │     └ 3
+               └ <function _main at 0x00000137B01A11C0>
+  File "D:\Python3126\Lib\multiprocessing\spawn.py", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 344
+           │    └ <function BaseProcess._bootstrap at 0x00000137B008B740>
+           └ <SpawnProcess name='SpawnProcess-1' parent=12388 started>
+  File "D:\Python3126\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x00000137B008ACA0>
+    └ <SpawnProcess name='SpawnProcess-1' parent=12388 started>
+  File "D:\Python3126\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x00000137B015DFD0>, 'target': <bound method Server.run of <uvicorn.server.Server...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=12388 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=12388 started>
+    │    └ <function subprocess_started at 0x00000137B2552660>
+    └ <SpawnProcess name='SpawnProcess-1' parent=12388 started>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=728, family=2, type=1, proto=6, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x00000137B257CF80>>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+           │           │    │             │                      │    │      └ <function Config.get_loop_factory at 0x00000137B24A7380>
+           │           │    │             │                      │    └ <uvicorn.config.Config object at 0x00000137B015DFD0>
+           │           │    │             │                      └ <uvicorn.server.Server object at 0x00000137B257CF80>
+           │           │    │             └ [<socket.socket fd=728, family=2, type=1, proto=6, laddr=('127.0.0.1', 8000)>]
+           │           │    └ <function Server.serve at 0x00000137B2551C60>
+           │           └ <uvicorn.server.Server object at 0x00000137B257CF80>
+           └ <function run at 0x00000137B1D527A0>
+  File "D:\Python3126\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           │      │   └ <coroutine object Server.serve at 0x00000137B00182E0>
+           │      └ <function Runner.run at 0x00000137B1E04040>
+           └ <asyncio.runners.Runner object at 0x00000137B236AC30>
+  File "D:\Python3126\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_se...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x00000137B1E01C60>
+           │    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x00000137B236AC30>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 674, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x00000137B1E01BC0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 641, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x00000137B1E039C0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 1986, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x00000137B1D39F80>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x00000137B37C0220>()>
+  File "D:\Python3126\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <_asyncio.TaskStepMethWrapper object at 0x00000137B37C0220>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <_asyncio.TaskStepMethWrapper object at 0x00000137B37C0220>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x00000137B37C0220>()>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x00000137B25ECB00>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0A40>>
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x00000137B363EBD0>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x00000137B25ECB00>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\applications.py", line 1133, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0A40>>
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0A40>>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x00000137B363EF30>
+          └ <fastapi.applications.FastAPI object at 0x00000137B363EBD0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x00000137B36479C0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x00000137B3273440>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x00000137B363EF30>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x00000137B36479C0>
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x00000137B363FC80>
+          │                            │    └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000137B34B7EC0>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x00000137B3273440>
+          └ <function wrap_app_handling_exceptions at 0x00000137B35480E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000137B3647880>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000137B34B7EC0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000137B3647880>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <fastapi.routing.APIRouter object at 0x00000137B363EC30>
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000137B34B7EC0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000137B3647880>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x00000137B363EC30>>
+          └ <fastapi.routing.APIRouter object at 0x00000137B363EC30>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000137B3647880>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x00000137B3549580>
+          └ APIRoute(path='/calc', name='get_calc', methods=['GET'])
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000137B3647880>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x00000137B36474C0>
+          └ APIRoute(path='/calc', name='get_calc', methods=['GET'])
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 123, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000137B3647880>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x00000137B363F320>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x00000137B36477E0>
+          └ <function wrap_app_handling_exceptions at 0x00000137B35480E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000137B3647920>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000137B37C0...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x00000137B36477E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 109, in app
+    response = await f(request)
+                     │ └ <starlette.requests.Request object at 0x00000137B363F320>
+                     └ <function get_request_handler.<locals>.app at 0x00000137B3647380>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 387, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x00000137B354B380>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 288, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'expression': '2 / 0'}
+                 │         └ <function get_calc at 0x00000137B36472E0>
+                 └ Dependant(path_params=[], query_params=[ModelField(field_info=Query(PydanticUndefined), name='expression', mode='validation')...
+
+> File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\main.py", line 23, in get_calc
+    result = eval(expression)
+                  └ '2 / 0'
+
+  File "<string>", line 1, in <module>
+
+ZeroDivisionError: division by zero
+14:59:48 | INFO     | main:get_calc:19 | Пользователь обратился к эндпоинту /calc
+14:59:48 | INFO     | main:get_calc:22 | Попытка вычислить выражение 2 / 5
+14:59:48 | INFO     | main:get_calc:24 | Результат вычисления: 0.4
+15:00:45 | INFO     | main:get_calc:19 | Пользователь обратился к эндпоинту /calc
+15:00:45 | INFO     | main:get_calc:22 | Попытка вычислить выражение 2 / 0
+15:00:45 | ERROR    | main:get_calc:28 | При вычислении произошла ошибка
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "D:\Python3126\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 356
+               │     └ 3
+               └ <function _main at 0x000002D53F0F11C0>
+  File "D:\Python3126\Lib\multiprocessing\spawn.py", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 356
+           │    └ <function BaseProcess._bootstrap at 0x000002D53EFDB740>
+           └ <SpawnProcess name='SpawnProcess-2' parent=12388 started>
+  File "D:\Python3126\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x000002D53EFDACA0>
+    └ <SpawnProcess name='SpawnProcess-2' parent=12388 started>
+  File "D:\Python3126\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x000002D53F0ADFD0>, 'target': <bound method Server.run of <uvicorn.server.Server...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-2' parent=12388 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-2' parent=12388 started>
+    │    └ <function subprocess_started at 0x000002D5414A2660>
+    └ <SpawnProcess name='SpawnProcess-2' parent=12388 started>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=776, family=2, type=1, proto=6, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x000002D5414CCCE0>>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+           │           │    │             │                      │    │      └ <function Config.get_loop_factory at 0x000002D5413F7380>
+           │           │    │             │                      │    └ <uvicorn.config.Config object at 0x000002D53F0ADFD0>
+           │           │    │             │                      └ <uvicorn.server.Server object at 0x000002D5414CCCE0>
+           │           │    │             └ [<socket.socket fd=776, family=2, type=1, proto=6, laddr=('127.0.0.1', 8000)>]
+           │           │    └ <function Server.serve at 0x000002D5414A1C60>
+           │           └ <uvicorn.server.Server object at 0x000002D5414CCCE0>
+           └ <function run at 0x000002D540CC27A0>
+  File "D:\Python3126\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           │      │   └ <coroutine object Server.serve at 0x000002D53EF682E0>
+           │      └ <function Runner.run at 0x000002D540D74040>
+           └ <asyncio.runners.Runner object at 0x000002D5412BAC30>
+  File "D:\Python3126\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_se...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x000002D540D71C60>
+           │    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x000002D5412BAC30>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 674, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x000002D540D71BC0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 641, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x000002D540D739C0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 1986, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x000002D540CA9F80>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000002D5426F02B0>()>
+  File "D:\Python3126\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000002D5426F02B0>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000002D5426F02B0>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x000002D5426F02B0>()>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x000002D5425737D0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0290>>
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x000002D54258EB10>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x000002D5425737D0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\applications.py", line 1133, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0290>>
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0290>>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x000002D54258E5A0>
+          └ <fastapi.applications.FastAPI object at 0x000002D54258EB10>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x000002D542597600>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x000002D54258F1A0>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x000002D54258E5A0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x000002D542597600>
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x000002D54258F080>
+          │                            │    └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x000002D54258F020>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x000002D54258F1A0>
+          └ <function wrap_app_handling_exceptions at 0x000002D5424980E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x000002D5425977E0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x000002D54258F020>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x000002D5425977E0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <fastapi.routing.APIRouter object at 0x000002D54258EB70>
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x000002D54258F020>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x000002D5425977E0>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x000002D54258EB70>>
+          └ <fastapi.routing.APIRouter object at 0x000002D54258EB70>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x000002D5425977E0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x000002D542499580>
+          └ APIRoute(path='/calc', name='get_calc', methods=['GET'])
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x000002D5425977E0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x000002D5425974C0>
+          └ APIRoute(path='/calc', name='get_calc', methods=['GET'])
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 123, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x000002D5425977E0>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x000002D54258FEC0>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x000002D542597880>
+          └ <function wrap_app_handling_exceptions at 0x000002D5424980E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x000002D5425979C0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x000002D5426F0...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x000002D542597880>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 109, in app
+    response = await f(request)
+                     │ └ <starlette.requests.Request object at 0x000002D54258FEC0>
+                     └ <function get_request_handler.<locals>.app at 0x000002D542597380>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 387, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x000002D54249B380>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 288, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'expression': '2 / 0'}
+                 │         └ <function get_calc at 0x000002D5425972E0>
+                 └ Dependant(path_params=[], query_params=[ModelField(field_info=Query(PydanticUndefined), name='expression', mode='validation')...
+
+> File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\main.py", line 23, in get_calc
+    result = eval(expression)
+                  └ '2 / 0'
+
+  File "<string>", line 1, in <module>
+
+ZeroDivisionError: division by zero
+15:01:55 | INFO     | main:get_calc:19 | Пользователь обратился к эндпоинту /calc
+15:01:55 | INFO     | main:get_calc:22 | Попытка вычислить выражение 10000 / 0
+15:01:55 | ERROR    | main:get_calc:28 | При вычислении произошла ошибка
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "D:\Python3126\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 384
+               │     └ 3
+               └ <function _main at 0x00000210DE2711C0>
+  File "D:\Python3126\Lib\multiprocessing\spawn.py", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 384
+           │    └ <function BaseProcess._bootstrap at 0x00000210DE15B740>
+           └ <SpawnProcess name='SpawnProcess-4' parent=12388 started>
+  File "D:\Python3126\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x00000210DE15ACA0>
+    └ <SpawnProcess name='SpawnProcess-4' parent=12388 started>
+  File "D:\Python3126\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x00000210DE22DFD0>, 'target': <bound method Server.run of <uvicorn.server.Server...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-4' parent=12388 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-4' parent=12388 started>
+    │    └ <function subprocess_started at 0x00000210E05D2660>
+    └ <SpawnProcess name='SpawnProcess-4' parent=12388 started>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=752, family=2, type=1, proto=6, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x00000210E05FCCE0>>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+           │           │    │             │                      │    │      └ <function Config.get_loop_factory at 0x00000210E0537380>
+           │           │    │             │                      │    └ <uvicorn.config.Config object at 0x00000210DE22DFD0>
+           │           │    │             │                      └ <uvicorn.server.Server object at 0x00000210E05FCCE0>
+           │           │    │             └ [<socket.socket fd=752, family=2, type=1, proto=6, laddr=('127.0.0.1', 8000)>]
+           │           │    └ <function Server.serve at 0x00000210E05D1C60>
+           │           └ <uvicorn.server.Server object at 0x00000210E05FCCE0>
+           └ <function run at 0x00000210DE8427A0>
+  File "D:\Python3126\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           │      │   └ <coroutine object Server.serve at 0x00000210DE0E82E0>
+           │      └ <function Runner.run at 0x00000210DFEC4040>
+           └ <asyncio.runners.Runner object at 0x00000210E040AC30>
+  File "D:\Python3126\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_se...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x00000210DFEC1C60>
+           │    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x00000210E040AC30>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 674, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x00000210DFEC1BC0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 641, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x00000210DFEC39C0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 1986, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x00000210DE829F80>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x00000210E0A29690>()>
+  File "D:\Python3126\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <_asyncio.TaskStepMethWrapper object at 0x00000210E0A29690>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <_asyncio.TaskStepMethWrapper object at 0x00000210E0A29690>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x00000210E0A29690>()>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x00000210E066C8F0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720590>>
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x00000210E166E960>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x00000210E066C8F0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\applications.py", line 1133, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720590>>
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720590>>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x00000210E166EF60>
+          └ <fastapi.applications.FastAPI object at 0x00000210E166E960>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x00000210E16776A0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x00000210E166EE70>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x00000210E166EF60>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x00000210E16776A0>
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x00000210E166FE00>
+          │                            │    └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000210E166E150>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x00000210E166EE70>
+          └ <function wrap_app_handling_exceptions at 0x00000210E15780E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000210E16777E0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000210E166E150>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000210E16777E0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <fastapi.routing.APIRouter object at 0x00000210E166E870>
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000210E166E150>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000210E16777E0>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x00000210E166E870>>
+          └ <fastapi.routing.APIRouter object at 0x00000210E166E870>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000210E16777E0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x00000210E1579580>
+          └ APIRoute(path='/calc', name='get_calc', methods=['GET'])
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000210E16777E0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x00000210E16774C0>
+          └ APIRoute(path='/calc', name='get_calc', methods=['GET'])
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 123, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000210E16777E0>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x00000210E1720620>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x00000210E1677880>
+          └ <function wrap_app_handling_exceptions at 0x00000210E15780E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000210E16779C0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x00000210E1720...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x00000210E1677880>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 109, in app
+    response = await f(request)
+                     │ └ <starlette.requests.Request object at 0x00000210E1720620>
+                     └ <function get_request_handler.<locals>.app at 0x00000210E1677380>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 387, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x00000210E157B380>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 288, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'expression': '10000 / 0'}
+                 │         └ <function get_calc at 0x00000210E16772E0>
+                 └ Dependant(path_params=[], query_params=[ModelField(field_info=Query(PydanticUndefined), name='expression', mode='validation')...
+
+> File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\main.py", line 23, in get_calc
+    result = eval(expression)
+                  └ '10000 / 0'
+
+  File "<string>", line 1, in <module>
+
+ZeroDivisionError: division by zero
+15:16:18 | INFO     | main:get_calc:19 | Пользователь обратился к эндпоинту /calc
+15:16:18 | INFO     | main:get_calc:22 | Попытка вычислить выражение 2 / 0
+15:16:18 | ERROR    | main:get_calc:28 | При вычислении произошла ошибка
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "D:\Python3126\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 372
+               │     └ 3
+               └ <function _main at 0x00000281451111C0>
+  File "D:\Python3126\Lib\multiprocessing\spawn.py", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 372
+           │    └ <function BaseProcess._bootstrap at 0x0000028144FFB740>
+           └ <SpawnProcess name='SpawnProcess-10' parent=12388 started>
+  File "D:\Python3126\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x0000028144FFACA0>
+    └ <SpawnProcess name='SpawnProcess-10' parent=12388 started>
+  File "D:\Python3126\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x00000281450CE000>, 'target': <bound method Server.run of <uvicorn.server.Server...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-10' parent=12388 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-10' parent=12388 started>
+    │    └ <function subprocess_started at 0x0000028147492660>
+    └ <SpawnProcess name='SpawnProcess-10' parent=12388 started>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=748, family=2, type=1, proto=6, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x00000281474BCCE0>>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+           │           │    │             │                      │    │      └ <function Config.get_loop_factory at 0x00000281473F7380>
+           │           │    │             │                      │    └ <uvicorn.config.Config object at 0x00000281450CE000>
+           │           │    │             │                      └ <uvicorn.server.Server object at 0x00000281474BCCE0>
+           │           │    │             └ [<socket.socket fd=748, family=2, type=1, proto=6, laddr=('127.0.0.1', 8000)>]
+           │           │    └ <function Server.serve at 0x0000028147491C60>
+           │           └ <uvicorn.server.Server object at 0x00000281474BCCE0>
+           └ <function run at 0x0000028146CD27A0>
+  File "D:\Python3126\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           │      │   └ <coroutine object Server.serve at 0x0000028144F882E0>
+           │      └ <function Runner.run at 0x0000028146D84040>
+           └ <asyncio.runners.Runner object at 0x00000281472CAC30>
+  File "D:\Python3126\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_se...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x0000028146D81C60>
+           │    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x00000281472CAC30>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 674, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x0000028146D81BC0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 641, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000028146D839C0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 1986, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000028146CB9F80>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x0000028148610580>()>
+  File "D:\Python3126\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <_asyncio.TaskStepMethWrapper object at 0x0000028148610580>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <_asyncio.TaskStepMethWrapper object at 0x0000028148610580>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x0000028148610580>()>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x000002814740A3F0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610560>>
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x000002814856E960>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x000002814740A3F0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\applications.py", line 1133, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610560>>
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610560>>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x000002814856E1E0>
+          └ <fastapi.applications.FastAPI object at 0x000002814856E960>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x00000281485777E0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x0000028148416600>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x000002814856E1E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x00000281485777E0>
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x000002814856EF90>
+          │                            │    └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000281484159A0>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x0000028148416600>
+          └ <function wrap_app_handling_exceptions at 0x00000281484740E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148577740>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000281484159A0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148577740>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <fastapi.routing.APIRouter object at 0x000002814856EA20>
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000281484159A0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148577740>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x000002814856EA20>>
+          └ <fastapi.routing.APIRouter object at 0x000002814856EA20>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148577740>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x0000028148475580>
+          └ APIRoute(path='/calc', name='get_calc', methods=['GET'])
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148577740>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x00000281485774C0>
+          └ APIRoute(path='/calc', name='get_calc', methods=['GET'])
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 123, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148577740>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x000002814856FE00>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x0000028148577920>
+          └ <function wrap_app_handling_exceptions at 0x00000281484740E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x00000281485779C0>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148610...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x0000028148577920>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 109, in app
+    response = await f(request)
+                     │ └ <starlette.requests.Request object at 0x000002814856FE00>
+                     └ <function get_request_handler.<locals>.app at 0x0000028148577380>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 387, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x0000028148477380>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 288, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'expression': '2 / 0'}
+                 │         └ <function get_calc at 0x00000281485772E0>
+                 └ Dependant(path_params=[], query_params=[ModelField(field_info=Query(PydanticUndefined), name='expression', mode='validation')...
+
+> File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\main.py", line 23, in get_calc
+    result = eval(expression)
+                  └ '2 / 0'
+
+  File "<string>", line 1, in <module>
+
+ZeroDivisionError: division by zero
+15:16:31 | INFO     | main:get_calc:19 | Пользователь обратился к эндпоинту /calc
+15:16:31 | INFO     | main:get_calc:22 | Попытка вычислить выражение '2' / 2
+15:16:31 | ERROR    | main:get_calc:28 | При вычислении произошла ошибка
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "D:\Python3126\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 372
+               │     └ 3
+               └ <function _main at 0x00000281451111C0>
+  File "D:\Python3126\Lib\multiprocessing\spawn.py", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 372
+           │    └ <function BaseProcess._bootstrap at 0x0000028144FFB740>
+           └ <SpawnProcess name='SpawnProcess-10' parent=12388 started>
+  File "D:\Python3126\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x0000028144FFACA0>
+    └ <SpawnProcess name='SpawnProcess-10' parent=12388 started>
+  File "D:\Python3126\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x00000281450CE000>, 'target': <bound method Server.run of <uvicorn.server.Server...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-10' parent=12388 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-10' parent=12388 started>
+    │    └ <function subprocess_started at 0x0000028147492660>
+    └ <SpawnProcess name='SpawnProcess-10' parent=12388 started>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=748, family=2, type=1, proto=6, laddr=('127.0.0.1', 8000)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x00000281474BCCE0>>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+           │           │    │             │                      │    │      └ <function Config.get_loop_factory at 0x00000281473F7380>
+           │           │    │             │                      │    └ <uvicorn.config.Config object at 0x00000281450CE000>
+           │           │    │             │                      └ <uvicorn.server.Server object at 0x00000281474BCCE0>
+           │           │    │             └ [<socket.socket fd=748, family=2, type=1, proto=6, laddr=('127.0.0.1', 8000)>]
+           │           │    └ <function Server.serve at 0x0000028147491C60>
+           │           └ <uvicorn.server.Server object at 0x00000281474BCCE0>
+           └ <function run at 0x0000028146CD27A0>
+  File "D:\Python3126\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           │      │   └ <coroutine object Server.serve at 0x0000028144F882E0>
+           │      └ <function Runner.run at 0x0000028146D84040>
+           └ <asyncio.runners.Runner object at 0x00000281472CAC30>
+  File "D:\Python3126\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_se...
+           │    │     └ <function BaseEventLoop.run_until_complete at 0x0000028146D81C60>
+           │    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x00000281472CAC30>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 674, in run_until_complete
+    self.run_forever()
+    │    └ <function BaseEventLoop.run_forever at 0x0000028146D81BC0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 641, in run_forever
+    self._run_once()
+    │    └ <function BaseEventLoop._run_once at 0x0000028146D839C0>
+    └ <_WindowsSelectorEventLoop running=True closed=False debug=False>
+  File "D:\Python3126\Lib\asyncio\base_events.py", line 1986, in _run_once
+    handle._run()
+    │      └ <function Handle._run at 0x0000028146CB9F80>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x0000028148617E50>()>
+  File "D:\Python3126\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+    │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+    │    │            │    │           └ <Handle <_asyncio.TaskStepMethWrapper object at 0x0000028148617E50>()>
+    │    │            │    └ <member '_callback' of 'Handle' objects>
+    │    │            └ <Handle <_asyncio.TaskStepMethWrapper object at 0x0000028148617E50>()>
+    │    └ <member '_context' of 'Handle' objects>
+    └ <Handle <_asyncio.TaskStepMethWrapper object at 0x0000028148617E50>()>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x000002814740A3F0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617E30>>
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x000002814856E960>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x000002814740A3F0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\applications.py", line 1133, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617E30>>
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617E30>>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x000002814856E1E0>
+          └ <fastapi.applications.FastAPI object at 0x000002814856E960>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x0000028148623880>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x0000028148416600>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x000002814856E1E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+          │                            │    │    │     │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x0000028148623880>
+          │                            │    │    │     │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+          │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    │    └ <starlette.requests.Request object at 0x00000281486164B0>
+          │                            │    └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000281484159A0>
+          │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x0000028148416600>
+          └ <function wrap_app_handling_exceptions at 0x00000281484740E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148623740>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000281484159A0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148623740>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <fastapi.routing.APIRouter object at 0x000002814856EA20>
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x00000281484159A0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148623740>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x000002814856EA20>>
+          └ <fastapi.routing.APIRouter object at 0x000002814856EA20>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148623740>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │     └ <function Route.handle at 0x0000028148475580>
+          └ APIRoute(path='/calc', name='get_calc', methods=['GET'])
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148623740>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │    └ <function request_response.<locals>.app at 0x00000281485774C0>
+          └ APIRoute(path='/calc', name='get_calc', methods=['GET'])
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 123, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+          │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148623740>
+          │                            │    │        │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+          │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          │                            │    └ <starlette.requests.Request object at 0x0000028148617740>
+          │                            └ <function request_response.<locals>.app.<locals>.app at 0x00000281486239C0>
+          └ <function wrap_app_handling_exceptions at 0x00000281484740E0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+          │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x0000028148623B00>
+          │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.h11_impl.RequestResponseCycle object at 0x0000028148617...
+          │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+          └ <function request_response.<locals>.app.<locals>.app at 0x00000281486239C0>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 109, in app
+    response = await f(request)
+                     │ └ <starlette.requests.Request object at 0x0000028148617740>
+                     └ <function get_request_handler.<locals>.app at 0x0000028148577380>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 387, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x0000028148477380>
+  File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\venv\Lib\site-packages\fastapi\routing.py", line 288, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'expression': "'2' / 2"}
+                 │         └ <function get_calc at 0x00000281485772E0>
+                 └ Dependant(path_params=[], query_params=[ModelField(field_info=Query(PydanticUndefined), name='expression', mode='validation')...
+
+> File "D:\OneDrive - MAXIMUM\VS_projects\MAXIMUM\SPO\2025-2026\back_5_sem\17_loguru\main.py", line 23, in get_calc
+    result = eval(expression)
+                  └ "'2' / 2"
+
+  File "<string>", line 1, in <module>
+
+TypeError: unsupported operand type(s) for /: 'str' and 'int'
