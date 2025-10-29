@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Список товаров</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body class="container">
+  <header>
+    <h1>Список товаров</h1>
+    <nav>
+      <a href="/">Главная</a>
+      <a href="/products/new">Добавить</a>
+    </nav>
+    <hr />
+  </header>
+
+  {% if products|length == 0 %}
+    <p>Товаров пока нет</p>
+  {% else %}
+    <table>
+      <thead><tr><th>#</th><th>Название</th><th>Цена</th><th>Остаток</th></tr></thead>
+      <tbody>
+        {% for p in products %}
+        <tr>
+          <td>{{ p.id }}</td>
+          <td>{{ p.title }}</td>
+          <td>{{ p.price | int }}</td>
+          <td>{{ p.stock | int }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</body>
+</html>

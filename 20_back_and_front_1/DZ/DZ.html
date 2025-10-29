@@ -1,0 +1,22 @@
+  <table>
+    <thead><tr><th>#</th><th>Имя студента</th><th>Предмет</th><th>Балл</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Дима Иванов</td><td>Основы языка Java</td><td>85</td></tr>
+      <tr><td>2</td><td>Максим Петров</td><td>Алгоритмы и структуры данных</td><td>80</td></tr>
+    </tbody>
+  </table>
+
+
+<table>
+    <thead><tr><th>#</th><th>Имя студента</th><th>Предмет</th><th>Балл</th></tr></thead>
+    <tbody>
+    {% for s in students %}
+    <tr>
+        <td>{{ s.id }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.subject }}</td>
+        <td>{{ s.score | int }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

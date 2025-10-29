@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Добавить товар</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body class="container">
+  <header>
+    <h1>Новый товар</h1>
+    <nav>
+      <a href="/static/index.html">Главная</a>
+      <a href="/static/products.html">Список</a>
+    </nav>
+    <hr />
+  </header>
+
+  <form>
+    <label>Название: <input type="text" placeholder="Например: Мышка" /></label>
+    <label>Цена: <input type="number" min="0" step="0.01" /></label>
+    <label>Остаток: <input type="number" min="0" /></label>
+    <button type="button">Отправить</button>
+  </form>
+
+</body>
+</html>

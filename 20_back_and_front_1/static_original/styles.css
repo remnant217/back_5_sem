@@ -1,0 +1,45 @@
+:root { 
+    font-family: system-ui, sans-serif; 
+}
+
+.container { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 1rem; 
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: .5rem; 
+}
+
+th, td { 
+    border-bottom: 1px solid #e5e7eb; 
+    padding: .5rem; 
+    text-align: left; 
+}
+
+.button { 
+    padding: .5rem .75rem; 
+    border: 1px solid #cbd5e1; 
+    border-radius: .5rem; 
+    text-decoration: none; 
+}
+
+label { 
+    display:block; 
+    margin:.5rem 0; 
+}
+
+.hint { 
+    color: #666; 
+    font-size: .9rem; 
+}
+
+form {
+  display: flex;
+  flex-direction: column; 
+  gap: .75rem;            
+  align-items: flex-start;
+}
