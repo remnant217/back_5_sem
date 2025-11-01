@@ -50,4 +50,6 @@
 - SQLite
 - Alembic
 - Pytest
+- Lorugu
+- HTTPX
 - *список будет пополняться по мере разработки курса*
