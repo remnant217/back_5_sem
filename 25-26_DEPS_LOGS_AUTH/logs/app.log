@@ -1,0 +1,24 @@
+21:46:49 | INFO     | app.core.middleware:add_process_time_header:14 | GET / выполнялся 0.38 мс
+21:46:49 | INFO     | app.core.middleware:add_process_time_header:14 | GET /favicon.ico выполнялся 0.22 мс
+21:46:54 | INFO     | app.core.middleware:add_process_time_header:14 | GET /docs выполнялся 0.78 мс
+21:46:55 | INFO     | app.core.middleware:add_process_time_header:14 | GET /openapi.json выполнялся 33.97 мс
+22:21:34 | INFO     | app.core.middleware:add_process_time_header:14 | POST /users/ выполнялся 80.79 мс
+22:22:07 | INFO     | app.api.routes.login:login_access_token:41 | Пользователь успешно вошел в систему: username=Dima123
+22:22:07 | INFO     | app.core.middleware:add_process_time_header:14 | POST /login/access-token выполнялся 68.79 мс
+22:22:19 | INFO     | app.core.middleware:add_process_time_header:14 | GET /users/me выполнялся 2.15 мс
+22:23:30 | INFO     | app.core.middleware:add_process_time_header:14 | GET /users/Dima выполнялся 3.05 мс
+22:24:04 | INFO     | app.core.middleware:add_process_time_header:14 | GET /users/Dima123 выполнялся 1.84 мс
+22:24:41 | WARNING  | app.api.routes.login:login_access_token:27 | Неудачная попытка входа: username=Dima123
+22:24:41 | INFO     | app.core.middleware:add_process_time_header:14 | POST /login/access-token выполнялся 65.00 мс
+22:24:55 | INFO     | app.api.routes.login:login_access_token:41 | Пользователь успешно вошел в систему: username=Dima123
+22:24:55 | INFO     | app.core.middleware:add_process_time_header:14 | POST /login/access-token выполнялся 56.16 мс
+22:25:15 | INFO     | app.core.middleware:add_process_time_header:14 | POST /products/ выполнялся 8.81 мс
+22:25:35 | INFO     | app.core.middleware:add_process_time_header:14 | GET /products/123 выполнялся 3.17 мс
+22:25:39 | INFO     | app.core.middleware:add_process_time_header:14 | GET /products/1 выполнялся 1.55 мс
+22:26:24 | INFO     | app.core.middleware:add_process_time_header:14 | PUT /products/1 выполнялся 9.69 мс
+22:26:48 | INFO     | app.core.middleware:add_process_time_header:14 | GET /users/me выполнялся 2.82 мс
+22:32:04 | INFO     | app.core.middleware:add_process_time_header:14 | PUT /users/1 выполнялся 71.95 мс
+22:33:31 | WARNING  | app.api.routes.login:login_access_token:27 | Неудачная попытка входа: username=Dima123
+22:33:31 | INFO     | app.core.middleware:add_process_time_header:14 | POST /login/access-token выполнялся 67.52 мс
+22:33:37 | INFO     | app.api.routes.login:login_access_token:41 | Пользователь успешно вошел в систему: username=Dima123
+22:33:37 | INFO     | app.core.middleware:add_process_time_header:14 | POST /login/access-token выполнялся 55.85 мс

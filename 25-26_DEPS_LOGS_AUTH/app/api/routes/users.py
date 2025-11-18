@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from app.api.deps import SessionDep
+from app.api.deps import SessionDep, CurrentUserDep
 from app.models.users import UserCreate, UserUpdate, UserOut
 from app.repositories.users import (
     create_user as create_user_repo,
@@ -10,6 +10,11 @@ from app.repositories.users import (
 )
 
 router = APIRouter(prefix='/users', tags=['users'])
+
+# получить текущего пользователя
+@router.get('/me', response_model=UserOut)
+async def get_user_me(current_user: CurrentUserDep):
+    return current_user
 
 # получить пользователя по username
 @router.get('/{username}', response_model=UserOut)
@@ -29,7 +34,7 @@ async def create_user(session: SessionDep, user_data: UserCreate):
     return new_user
 
 # обновить данные пользователя по id
-@router.put('/{user_id}", response_model=UserOut)
+@router.put('/{user_id}', response_model=UserOut)
 async def update_user(user_id: int, user_data: UserUpdate, session: SessionDep) -> UserOut:
     user_db = await get_user_by_id(session=session, user_id=user_id)
     if not user_db:

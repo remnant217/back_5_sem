@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean
 from pydantic import BaseModel, Field
-from . import Base
+from app.models import Base
 
 # модель таблицы "Продукты"
 class Product(Base):
