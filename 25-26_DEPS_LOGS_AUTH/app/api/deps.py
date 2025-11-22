@@ -25,9 +25,9 @@ SessionDep = Annotated[AsyncSession, Depends(get_session)]
 # получаем текущего пользователя
 async def get_current_user(session: SessionDep, token: str = Depends(oauth2_scheme)) -> User:
     credentials_exception = HTTPException(
-    status_code = 401,
-    detail = 'Не удалось подтвердить учетные данные',
-    headers = {'WWW-Authenticate': 'Bearer'}
+        status_code = 401,
+        detail = 'Не удалось подтвердить учетные данные',
+        headers = {'WWW-Authenticate': 'Bearer'}
     )
     try:
         payload = jwt.decode(

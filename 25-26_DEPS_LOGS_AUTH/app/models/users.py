@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean
 from pydantic import BaseModel, Field
-from . import Base
+from app.models import Base
 
 # модель таблицы "Пользователи"
 class User(Base):

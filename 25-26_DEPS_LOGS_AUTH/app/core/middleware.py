@@ -9,7 +9,7 @@ def setup_middleware(app: FastAPI):
     async def add_process_time_header(request: Request, call_next):
         start_time = perf_counter()
         response = await call_next(request)
-        # вычисляем время работы запроса в милисекундах
+        # вычисляем время работы запроса в миллисекундах
         process_time = (perf_counter() - start_time) * 1000
         logger.info(f'{request.method} {request.url.path} выполнялся {process_time:.2f} мс')
         response.headers['X-Process-Time-ms'] = f'{process_time:.2f}'
