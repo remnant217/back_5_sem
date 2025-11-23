@@ -38,6 +38,18 @@ async def get_user_by_username(session: AsyncSession, username: str) -> User | N
 async def get_user_by_id(session: AsyncSession, user_id: int) -> User | None:
     return await session.get(User, user_id)
 
+# новая функция - получение списка пользователей (для админа)
+async def get_users(session: AsyncSession, skip: int = 0, limit: int = 100) -> list[User]:
+    statement = select(User).offset(skip).limit(limit)
+    result = await session.execute(statement)
+    return list(result.scalars().all())
+
+# новая функция - удаление пользователя (для админа)
+# принимаем User, чтобы логику поиска вынести в эндпоинт
+async def delete_user(session: AsyncSession, user_db: User):
+    await session.delete(user_db)
+    await session.commit()
+
 # аутентификация пользователя
 async def authenticate(session: AsyncSession, username: str, password: str) -> User | None:
     user_db = await get_user_by_username(session=session, username=username)

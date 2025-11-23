@@ -49,3 +49,12 @@ async def get_current_user(session: SessionDep, token: str = Depends(oauth2_sche
     return user
 
 CurrentUserDep = Annotated[User, Depends(get_current_user)]
+
+# получаем текущего супер-пользователя (администратора)
+def get_current_superuser(current_user: CurrentUserDep) -> User:
+    if not current_user.is_superuser:
+        raise HTTPException(
+            status_code=403,
+            detail='У пользователя недостаточно прав для данного действия'
+        )
+    return current_user
