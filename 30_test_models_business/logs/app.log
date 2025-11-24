@@ -1,0 +1,4 @@
+15:12:03 | INFO     | app.core.middleware:add_process_time_header:14 | GET / выполнялся 1.07 мс
+15:12:03 | INFO     | app.core.middleware:add_process_time_header:14 | GET /favicon.ico выполнялся 0.91 мс
+15:12:06 | INFO     | app.core.middleware:add_process_time_header:14 | GET /docs выполнялся 0.77 мс
+15:12:07 | INFO     | app.core.middleware:add_process_time_header:14 | GET /openapi.json выполнялся 191.89 мс
